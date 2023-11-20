@@ -1,9 +1,14 @@
-const baseURL = `https://swapi.dev/api/people/`;
+const baseURL = `https://swapi.dev/api/people/?page=`;
+const page = `1`;
 
 const pageViewer = () => {
   return parseInt(document.querySelector('footer').textContent);
 };
 
-let page = pageViewer();
+const characters = document.querySelectorAll('#characters li');
 
-console.log(page);
+const dataFetching = async (pageNumber) => {
+  fetch(`${baseURL}?page=${page}`);
+};
+
+page = pageViewer();
