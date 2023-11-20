@@ -34,7 +34,7 @@ main {
   margin-top: -49px;
 }
 
-main > article {
+main>article {
   display: flex;
   flex-direction: column;
   width: 484px;
@@ -43,7 +43,7 @@ main > article {
   justify-content: space-between;
 }
 
-article > header {
+article>header {
   width: 100%;
   height: 73px;
   display: flex;
@@ -59,35 +59,40 @@ header h2 {
   color: rgba(255, 214, 0, 1);
 }
 
-.characters > header {
+.characters>header {
   background-color: rgb(83, 85, 86);
 }
-.details > header {
+
+.details>header {
   background-color: rgb(116, 134, 135);
 }
 
-.characters > section {
+.characters>section {
   height: 503px;
 }
 
-.details > section {
+.details>section {
   height: 267px;
 }
 
-.characters > footer {
+.characters>footer {
   height: 44px;
 }
-.details > footer {
+
+.details>footer {
   height: 284px;
 }
+
 .details footer ul {
   background-color: #8e8e8e;
   height: 236px;
   width: 100%;
 }
+
 .buttons {
   height: 51px;
 }
+
 h1 {
   color: rgba(255, 214, 0, 1);
   width: 380px;

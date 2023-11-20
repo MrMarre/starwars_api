@@ -1,7 +1,7 @@
 const baseURL = 'https://swapi.dev/api/people/';
 const characters = document.querySelectorAll('#characters li');
 const buttons = document.querySelectorAll('input');
-const detailLists = document.querySelectorAll('#details footer ul');
+
 
 let page;
 let characterInfo; //holding data for first 10 characters(page1)
@@ -29,7 +29,7 @@ const dataFetching = async (pageNumber) => {
       console.log('Fetch error:', error);
     });
 };
-
+// Prints out names 
 const printOutNames = (characters, names) => {
   names.forEach((name, index) => {
     characters[index].textContent = name.name;
@@ -45,14 +45,21 @@ const printOutInfo = (character) => {
 };
 
 const printOutAssets = (character) => {
+  const listItemsToClear = Array.from(document.querySelectorAll(".details footer ul li, .details footer ul h3, .details footer ul li span"));
+
+  listItemsToClear.forEach(item => {
+    item.textContent = '';
+  });
+
   buttons.forEach((btn) => {
     const fieldOfChoice = btn.id;
     if (character[fieldOfChoice].length > 0) {
       if (Array.isArray(character[fieldOfChoice])) {
         character[fieldOfChoice].forEach((item) => {
-          fetchAssets(item);
+          fetchAssets(item, fieldOfChoice);
         });
       } else {
+        fetchAssets(character[fieldOfChoice], fieldOfChoice)
       }
     } else {
       console.log('Ingen data');
@@ -60,7 +67,35 @@ const printOutAssets = (character) => {
   });
 };
 
-const fetchAssets = async (link) => {};
+//homeworld(url), species[], vehicles[], starships[]
+const fetchAssets = async (link, specifics) => {
+  fetch(link)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Server error:', +response.statusText);
+      } else {
+        return response.json();
+      }
+    })
+
+    .then((data) => {
+      console.log(specifics, data.name);
+      const ulFieldName = document.querySelector(
+        `article footer .${specifics} .name`
+      );
+      const listItems = document.querySelectorAll(
+        `article footer .${specifics} li span`
+      );
+      
+      ulFieldName.textContent += (ulFieldName.textContent ? ', ' : '') + data.name;
+
+
+      listItems.forEach(field => {
+        field.textContent += (field.textContent ? ', ' : '') + data[field.id];
+      })
+    })
+    .catch((error) => console.log(error));
+};
 
 characters.forEach((character) => {
   character.addEventListener('click', function () {
@@ -75,6 +110,7 @@ characters.forEach((character) => {
 buttons.forEach((btn) => {
   btn.addEventListener('click', () => {
     if (btn.checked) {
+      const detailLists = document.querySelectorAll('.details footer ul');
       detailLists.forEach((list) => {
         if (list.classList.contains(btn.id)) {
           list.classList.remove('hidden');
