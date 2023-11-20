@@ -2,74 +2,73 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Star Wars with API</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-    <header>
+    <header class="mainheader">
         <h1>STAR WARS CATALOG</h1>
     </header>
-
-    <article>
-        <header>Characters</header>
-        <section>
-            <ul id="characters">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </section>
-        <footer>1</footer>
-    </article>
-    <article>
-        <header>Details</header>
-        <section id="details">
-            <h2></h2>
-            <ul>
-                <li>Height: <span id="height"></span> cm</li>
-                <li>Mass: <span id="mass"></span> kg</li>
-                <li>Hair color: <span id="hair_color"></span></li>
-                <li>Skin color: <span id="skin_color"></span></li>
-                <li>Eye color: <span id="eye_color"></span></li>
-                <li>Birth year: <span id="birth_year"></span></li>
-                <li>Gender: <span id="gender"></span></li>
-            </ul>
-            <footer>
-                <input type="radio" name="deeperinfo" id="homeworld" checked>
-                <input type="radio" name="deeperinfo" id="species">
-                <input type="radio" name="deeperinfo" id="vehicles">
-                <input type="radio" name="deeperinfo" id="starships">
-                <ul class="homeworld">
-                    <li>homeworld</li>
-
+    <main>
+        <article class="characters">
+            <header>
+                <h2>Characters</h2>
+            </header>
+            <section>
+                <ul id="characters">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
                 </ul>
-                <ul class="species hidden">
-                    <li>species</li>
-
+            </section>
+            <footer>1</footer>
+        </article>
+        <article class="details">
+            <header>
+                <h2>Details</h2>
+            </header>
+            <section id="details">
+                <h2></h2>
+                <ul>
+                    <li>Height: <span id="height"></span> cm</li>
+                    <li>Mass: <span id="mass"></span> kg</li>
+                    <li>Hair color: <span id="hair_color"></span></li>
+                    <li>Skin color: <span id="skin_color"></span></li>
+                    <li>Eye color: <span id="eye_color"></span></li>
+                    <li>Birth year: <span id="birth_year"></span></li>
+                    <li>Gender: <span id="gender"></span></li>
                 </ul>
-                <ul class="vehicles hidden">
-                    <li>vehicles</li>
-
-                </ul>
-                <ul class="starships hidden">
-                    <li>starships</li>
-
-                </ul>
-            </footer>
-        </section>
-
-    </article>
-
+                <footer>
+                    <input type="radio" name="deeperinfo" id="homeworld" checked />
+                    <input type="radio" name="deeperinfo" id="species" />
+                    <input type="radio" name="deeperinfo" id="vehicles" />
+                    <input type="radio" name="deeperinfo" id="starships" />
+                    <ul class="homeworld">
+                        <li>homeworld</li>
+                    </ul>
+                    <ul class="species hidden">
+                        <li>species</li>
+                    </ul>
+                    <ul class="vehicles hidden">
+                        <li>vechicles</li>
+                    </ul>
+                    <ul class="starships hidden">
+                        <li>starships</li>
+                    </ul>
+                </footer>
+            </section>
+        </article>
+    </main>
     <script src="main.js"></script>
 </body>
 
