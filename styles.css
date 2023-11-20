@@ -40,6 +40,7 @@ main > article {
   width: 484px;
   height: 624px;
   background-color: #c4c4c4;
+  justify-content: space-between;
 }
 
 article > header {
@@ -65,12 +66,27 @@ header h2 {
   background-color: rgb(116, 134, 135);
 }
 
+.characters > section {
+  height: 100%;
+}
+
+.details > ul {
+  height: 267px;
+}
+
 .characters > footer {
   height: 44px;
 }
-
 .details > footer {
+  height: 284px;
+}
+.details footer ul {
   background-color: #8e8e8e;
+  height: 236px;
+  width: 100%;
+}
+.buttons {
+  height: 51px;
 }
 h1 {
   color: rgba(255, 214, 0, 1);
