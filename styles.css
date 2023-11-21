@@ -77,6 +77,7 @@ header h2 {
 
 .characters > footer {
   height: 44px;
+  h
 }
 
 .details > footer {
@@ -127,4 +128,18 @@ li {
 
 .hidden {
   display: none;
+}
+
+#lower.page-swapper {
+  background-image: url(./assets/chevron-left.svg);
+  background-size: cover;
+  height: 64px;
+  width: 64px;
+}
+
+#higher.page-swapper {
+  background-image: url(./assets/chevron-right.svg);
+  background-size: cover;
+  height: 64px;
+  width: 64px;
 }
