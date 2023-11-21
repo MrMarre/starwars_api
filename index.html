@@ -18,6 +18,7 @@
                 <h2>Characters</h2>
             </header>
             <section>
+                <div class="loader characters hidden"></div>
                 <ul id="characters">
                     <li></li>
                     <li></li>
@@ -44,7 +45,7 @@
             </header>
             <section id="details">
                 <h2></h2>
-                <ul>
+                <ul class="hidden">
                     <li>Height: <span id="height"></span> cm</li>
                     <li>Mass: <span id="mass"></span> kg</li>
                     <li>Hair color: <span id="hair_color"></span></li>
@@ -56,13 +57,13 @@
             </section>
             <footer>
                 <div class="buttons">
-                    <input type="radio" name="deeperinfo" id="homeworld" checked />
+                    <input type="radio" name="deeperinfo" id="homeworld" />
                     <input type="radio" name="deeperinfo" id="species" />
                     <input type="radio" name="deeperinfo" id="vehicles" />
                     <input type="radio" name="deeperinfo" id="starships" />
                 </div>
 
-                <ul class="homeworld">
+                <ul class="homeworld hidden">
                     <h3 class="name"></h3>
                     <li>Rotation period: <span id="rotation_period"></span> h</li>
                     <li>Orbital period <span id="orbital_period"></span> days</li>
@@ -73,6 +74,7 @@
                 </ul>
                 <ul class="species hidden">
                     <h3 class="name">species</h3>
+
                     <li>Language: <span id="language"></span></li>
                     <li>Classification: <span id="classification"></span></li>
                     <li>Average lifespan: <span id="average_lifespan"></span> years</li>
@@ -81,6 +83,7 @@
                 </ul>
                 <ul class="vehicles hidden">
                     <h3 class="name">vehicles</h3>
+
                     <li>Length: <span id="length"></span> m</li>
                     <li>Passengers: <span id="passengers"></span></li>
                     <li>Vehicle class: <span id="vehicle_class"></span></li>
@@ -88,11 +91,13 @@
                 </ul>
                 <ul class="starships hidden">
                     <h3 class="name">starships</h3>
+
                     <li>Length: <span id="length"></span> m</li>
                     <li>Passengers: <span id="passengers"></span></li>
                     <li>Starship class: <span id="starship_class"></span></li>
                     <li>Max speed: <span id="max_atmosphering_speed"></span> km/h</li>
                 </ul>
+                <div class="loader details hidden"></div>
             </footer>
         </article>
     </main>

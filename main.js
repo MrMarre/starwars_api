@@ -15,7 +15,8 @@ const pageViewer = () => {
 };
 
 // Function to fetch data based on pagenumber
-const dataFetching = async (pageNumber) => { 
+const dataFetching = async (pageNumber) => {
+  loaderFunction('characters', 'add');
   fetch(`${baseURL}?page=${page}`)
     .then((response) => {
       if (!response.ok) {
@@ -25,6 +26,7 @@ const dataFetching = async (pageNumber) => {
       }
     })
     .then((data) => {
+      loaderFunction('characters', 'remove');
       characterInfo = data.results; // Results is a key inside the object
       printOutNames(characters, characterInfo);
       return characterInfo;
@@ -45,6 +47,9 @@ const printOutNames = (characters, names) => {
 const printOutInfo = (character) => {
   const infoList = document.querySelectorAll('#details ul li span');
   document.querySelector('#details h2').textContent = character.name;
+  if (document.querySelector('.details ul').classList.contains('hidden')) {
+    document.querySelector('.details ul').classList.remove('hidden');
+  }
   infoList.forEach((listItem) => {
     listItem.textContent = character[listItem.id];
   });
@@ -52,6 +57,7 @@ const printOutInfo = (character) => {
 // From the function above we call this to get the proper fetch-method and then printing it out in the correct field
 const printOutAssets = (character) => {
   // Clear all the fields from old data
+  loaderFunction('details', 'add');
   const listItemsToClear = Array.from(
     document.querySelectorAll(
       '.details footer ul h3, .details footer ul li span'
@@ -105,7 +111,7 @@ const fetchAssets = async (link, specifics) => {
       const listItems = document.querySelectorAll(
         `article footer .${specifics} li span`
       );
-
+      loaderFunction('details', 'remove');
       // If the field has data then use ',' else just put the data
       ulFieldName.textContent +=
         (ulFieldName.textContent ? ', ' : '') + data.name;
@@ -116,13 +122,27 @@ const fetchAssets = async (link, specifics) => {
     .catch((error) => console.log(error));
 };
 
+// Function to show or hide the loadingcirle
+const loaderFunction = (what, toDo) => {
+  const loaders = document.querySelectorAll('.loader');
+  loaders.forEach((loader) => {
+    if (loader.classList.contains(what)) {
+      if (toDo === 'add') {
+        loader.classList.remove('hidden');
+      } else {
+        loader.classList.add('hidden');
+      }
+    }
+  });
+};
+
 // EventListener to choose which character to see the details about
 characters.forEach((character) => {
   character.addEventListener('click', function () {
     charName = this.textContent;
     thisChar = characterInfo.find((character) => character.name === charName);
 
-// If character-text is clicked, run functions below this comment
+    // If character-text is clicked, run functions below this comment
     printOutInfo(thisChar);
     printOutAssets(thisChar);
   });
@@ -147,14 +167,14 @@ buttons.forEach((btn) => {
 // EventListener to handle pages
 pageSwappers.forEach((swapper) => {
   swapper.addEventListener('click', () => {
-    if (swapper.id === 'higher') {
+    if (swapper.id === 'higher' && page < 8) {
       page++;
-      
     } else {
       page--;
     }
-    page = Math.min(page, 8)
-    page = Math.max(page, 1)
+
+    page = Math.min(page, 8);
+    page = Math.max(page, 1);
     dataFetching(page);
     document.querySelector('#page-index').textContent = page;
   });
