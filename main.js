@@ -15,7 +15,7 @@ const pageViewer = () => {
 };
 
 // Function to fetch data based on pagenumber
-const dataFetching = async (pageNumber) => {
+const dataFetching = async (pageNumber) => { 
   fetch(`${baseURL}?page=${page}`)
     .then((response) => {
       if (!response.ok) {
@@ -26,7 +26,9 @@ const dataFetching = async (pageNumber) => {
     })
     .then((data) => {
       characterInfo = data.results; // Results is a key inside the object
+      console.log(characterInfo)
       printOutNames(characters, characterInfo);
+      console.log(characters)
       return characterInfo;
     })
     .catch((error) => {
@@ -38,6 +40,7 @@ const dataFetching = async (pageNumber) => {
 const printOutNames = (characters, names) => {
   names.forEach((name, index) => {
     characters[index].textContent = name.name;
+    console.log(name.name)
   });
 };
 
@@ -122,6 +125,7 @@ characters.forEach((character) => {
     charName = this.textContent;
     thisChar = characterInfo.find((character) => character.name === charName);
 
+// If character-text is clicked, run functions below this comment
     printOutInfo(thisChar);
     printOutAssets(thisChar);
   });
