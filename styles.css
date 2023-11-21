@@ -112,7 +112,12 @@ li {
   display: none;
 }
 
-#lower.page-swapper {
+img {
+  width: 2rem;
+  height: auto;
+}
+
+/* #lower.page-swapper {
   background-image: url(./assets/chevron-left.svg);
   background-size: cover;
   height: 64px;
@@ -124,4 +129,4 @@ li {
   background-size: cover;
   height: 64px;
   width: 64px;
-}
+} */
