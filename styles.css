@@ -41,6 +41,9 @@ main>article {
   height: 624px;
   background-color: #c4c4c4;
   justify-content: space-between;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: -1px 4px 5px 0px rgba(0, 0, 0, 0.62);
+  -moz-box-shadow: -1px 4px 5px 0px rgba(0, 0, 0, 0.62);
 }
 
 article>header {
@@ -49,6 +52,7 @@ article>header {
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 header h2 {
@@ -72,12 +76,53 @@ header h2 {
   position: relative;
 }
 
+.characters>section>ul {
+  margin-top: -.2rem;
+}
+
+.characters>section>ul>li {
+  font-size: 24px;
+  color: #FFF;
+  letter-spacing: 3.6px;
+  padding: .65rem 0 .65rem 1.5rem;
+  /* padding-left: 1.5rem; */
+}
+
+.characters>section>ul>li:nth-of-type(odd) {
+  background-color: #8e8e8e;
+  color: #FFF;
+}
+
+.characters>section>ul>li:nth-of-type(even) {
+  background-color: #E1DEDE;
+  color: #535556;
+}
+
+
 .details>section {
   height: 267px;
+  padding: 1rem;
+
+}
+
+.details>section>h2 {
+  padding-bottom: .5rem;
+  font-size: 30px;
+  letter-spacing: 6px;
+  font-weight: 600;
+}
+
+.details>section>ul>li {
+  font-size: 18px;
+  letter-spacing: 3.6px;
+  font-weight: 500;
+  line-height: 1.8rem;
+
 }
 
 .characters>footer {
   height: 44px;
+
 }
 
 .details>footer {
