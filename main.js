@@ -26,9 +26,7 @@ const dataFetching = async (pageNumber) => {
     })
     .then((data) => {
       characterInfo = data.results; // Results is a key inside the object
-      console.log(characterInfo)
       printOutNames(characters, characterInfo);
-      console.log(characters)
       return characterInfo;
     })
     .catch((error) => {
@@ -40,7 +38,6 @@ const dataFetching = async (pageNumber) => {
 const printOutNames = (characters, names) => {
   names.forEach((name, index) => {
     characters[index].textContent = name.name;
-    console.log(name.name)
   });
 };
 
@@ -152,9 +149,12 @@ pageSwappers.forEach((swapper) => {
   swapper.addEventListener('click', () => {
     if (swapper.id === 'higher') {
       page++;
+      
     } else {
       page--;
     }
+    page = Math.min(page, 8)
+    page = Math.max(page, 1)
     dataFetching(page);
     document.querySelector('#page-index').textContent = page;
   });
