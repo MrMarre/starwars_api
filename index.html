@@ -1,107 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Star Wars with API</title>
     <link rel="stylesheet" href="styles.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="mainheader">
-        <h1>STAR WARS CATALOG</h1>
+      <h1>STAR WARS CATALOG</h1>
     </header>
     <main>
-        <article class="characters">
-            <header>
-                <h2>Characters</h2>
-            </header>
-            <section>
-                <div class="loader characters hidden"></div>
-                <ul id="characters">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </section>
-            <footer class="char-footer"> <!-- &#8592; &#8594; -->
-                <span class="page-swapper" id="lower">
-                    <img src="./assets/chevron-left.svg" alt="chevron left"></span><span id="page-index">1</span><span>
-                    /8</span><span class="page-swapper" id="higher">
-                    <img src="./assets/chevron-right.svg" alt="chevron right"></span>
-            </footer>
-        </article>
-        <article class="details">
-            <header>
-                <h2>Details</h2>
-            </header>
-            <section id="details">
-                <h2></h2>
-                <ul class="hidden">
-                    <li>Height: <span id="height"></span> cm</li>
-                    <li>Mass: <span id="mass"></span> kg</li>
-                    <li>Hair color: <span id="hair_color"></span></li>
-                    <li>Skin color: <span id="skin_color"></span></li>
-                    <li>Eye color: <span id="eye_color"></span></li>
-                    <li>Birth year: <span id="birth_year"></span></li>
-                    <li>Gender: <span id="gender"></span></li>
-                </ul>
-            </section>
-            <footer>
-                <div class="buttons">
-                    <input type="radio" name="deeperinfo" id="homeworld" />
-                    <input type="radio" name="deeperinfo" id="species" label for="species" />
-                    <input type="radio" name="deeperinfo" id="vehicles" label for="vehicles" />
-                    <input type="radio" name="deeperinfo" id="starships" label for="starships" />
-                </div>
+      <article class="characters">
+        <header>
+          <h2>Characters</h2>
+        </header>
+        <section>
+          <div class="loader characters hidden"></div>
+          <ul id="characters">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </section>
+        <footer class="char-footer">
+          <!-- &#8592; &#8594; -->
+          <span class="page-swapper" id="lower">
+            <img src="./assets/chevron-left.svg" alt="chevron left" /></span
+          ><span id="page-index">1</span><span> /8</span
+          ><span class="page-swapper" id="higher">
+            <img src="./assets/chevron-right.svg" alt="chevron right"
+          /></span>
+        </footer>
+      </article>
+      <article class="details">
+        <header>
+          <h2>Details</h2>
+        </header>
+        <section id="details">
+          <h2></h2>
+          <ul class="hidden">
+            <li>Height: <span id="height"></span> cm</li>
+            <li>Mass: <span id="mass"></span> kg</li>
+            <li>Hair color: <span id="hair_color"></span></li>
+            <li>Skin color: <span id="skin_color"></span></li>
+            <li>Eye color: <span id="eye_color"></span></li>
+            <li>Birth year: <span id="birth_year"></span></li>
+            <li>Gender: <span id="gender"></span></li>
+          </ul>
+        </section>
+        <footer>
+          <div class="buttons">
+            <input type="radio" name="deeperinfo" id="homeworld" />
+            <label for="homeworld">Homeworld</label>
+            <input type="radio" name="deeperinfo" id="species" />
+            <label for="species">Species</label>
+            <input type="radio" name="deeperinfo" id="vehicles" />
+            <label for="vehicles">Vehicles</label>
+            <input type="radio" name="deeperinfo" id="starships" />
+            <label for="starships">Starships</label>
+          </div>
 
-                <ul class="homeworld hidden">
-                    <h3 class="name"></h3>
-                    <li>Rotation period: <span id="rotation_period"></span> h</li>
-                    <li>Orbital period <span id="orbital_period"></span> days</li>
-                    <li>Diameter: <span id="diameter"></span> km</li>
-                    <li>Climate: <span id="climate"></span></li>
-                    <li>Gravity: <span id="gravity"></span></li>
-                    <li>Terrain: <span id="terrain"></span></li>
-                </ul>
-                <ul class="species hidden">
-                    <h3 class="name">species</h3>
+          <ul class="homeworld hidden">
+            <h3 class="name">Homeworld</h3>
+            <li>Rotation period: <span id="rotation_period"></span> h</li>
+            <li>Orbital period <span id="orbital_period"></span> days</li>
+            <li>Diameter: <span id="diameter"></span> km</li>
+            <li>Climate: <span id="climate"></span></li>
+            <li>Gravity: <span id="gravity"></span></li>
+            <li>Terrain: <span id="terrain"></span></li>
+          </ul>
+          <ul class="species hidden">
+            <h3 class="name">Species</h3>
 
-                    <li>Language: <span id="language"></span></li>
-                    <li>Classification: <span id="classification"></span></li>
-                    <li>Average lifespan: <span id="average_lifespan"></span> years</li>
-                    <li>Average height: <span id="average_height"></span> cm</li>
-                    <li>Designation: <span id="designation"></span></li>
-                </ul>
-                <ul class="vehicles hidden">
-                    <h3 class="name">vehicles</h3>
+            <li>Language: <span id="language"></span></li>
+            <li>Classification: <span id="classification"></span></li>
+            <li>Average lifespan: <span id="average_lifespan"></span> years</li>
+            <li>Average height: <span id="average_height"></span> cm</li>
+            <li>Designation: <span id="designation"></span></li>
+          </ul>
+          <ul class="vehicles hidden">
+            <h3 class="name">Vehicles</h3>
 
-                    <li>Length: <span id="length"></span> m</li>
-                    <li>Passengers: <span id="passengers"></span></li>
-                    <li>Vehicle class: <span id="vehicle_class"></span></li>
-                    <li>Max speed: <span id="max_atmosphering_speed"></span> km/h</li>
-                </ul>
-                <ul class="starships hidden">
-                    <h3 class="name">starships</h3>
+            <li>Length: <span id="length"></span> m</li>
+            <li>Passengers: <span id="passengers"></span></li>
+            <li>Vehicle class: <span id="vehicle_class"></span></li>
+            <li>Max speed: <span id="max_atmosphering_speed"></span> km/h</li>
+          </ul>
+          <ul class="starships hidden">
+            <h3 class="name">Starships</h3>
 
-                    <li>Length: <span id="length"></span> m</li>
-                    <li>Passengers: <span id="passengers"></span></li>
-                    <li>Starship class: <span id="starship_class"></span></li>
-                    <li>Max speed: <span id="max_atmosphering_speed"></span> km/h</li>
-                </ul>
-                <div class="loader details hidden"></div>
-            </footer>
-        </article>
+            <li>Length: <span id="length"></span> m</li>
+            <li>Passengers: <span id="passengers"></span></li>
+            <li>Starship class: <span id="starship_class"></span></li>
+            <li>Max speed: <span id="max_atmosphering_speed"></span> km/h</li>
+          </ul>
+          <div class="loader details hidden"></div>
+        </footer>
+      </article>
     </main>
     <script src="main.js"></script>
-</body>
-
+  </body>
 </html>
