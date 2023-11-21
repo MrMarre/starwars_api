@@ -55,7 +55,7 @@ const printOutInfo = (character) => {
   });
 };
 // From the function above we call this to get the proper fetch-method and then printing it out in the correct field
-const printOutAssets = (character) => {
+const printOutAssets = async (character) => {
   // Clear all the fields from old data
   loaderFunction('details', 'add');
   const listItemsToClear = Array.from(
@@ -67,16 +67,21 @@ const printOutAssets = (character) => {
     item.textContent = '';
   });
   // Alot of ifs to find where the correct data should be placed and which to see.
-  buttons.forEach((btn) => {
+  buttons.forEach((btn, index) => {
     const fieldOfChoice = btn.id;
-
+    let last;
+    lastField = index === 3 ? true : false;
     if (character[fieldOfChoice].length > 0) {
       if (Array.isArray(character[fieldOfChoice])) {
-        character[fieldOfChoice].forEach((item) => {
-          fetchAssets(item, fieldOfChoice);
+        character[fieldOfChoice].forEach((item, index) => {
+          lastItem =
+            index === character[fieldOfChoice].length - 1 ? true : false;
+
+          last = lastField && lastItem ? true : false;
+          fetchAssets(item, fieldOfChoice, last);
         });
       } else {
-        fetchAssets(character[fieldOfChoice], fieldOfChoice);
+        fetchAssets(character[fieldOfChoice], fieldOfChoice, last);
       }
     } else {
       const ulFieldName = document.querySelector(
@@ -90,13 +95,15 @@ const printOutAssets = (character) => {
       listItems.forEach((field) => {
         field.textContent = 'N/A';
       });
+
+      btnToggle(false);
     }
   });
 };
 
 // Sort and push detail-data from the chosen character
-const fetchAssets = async (link, specifics) => {
-  fetch(link)
+const fetchAssets = async (link, specifics, last) => {
+  await fetch(link)
     .then((response) => {
       if (!response.ok) {
         throw new Error('Server error:', +response.statusText);
@@ -111,7 +118,7 @@ const fetchAssets = async (link, specifics) => {
       const listItems = document.querySelectorAll(
         `article footer .${specifics} li span`
       );
-      loaderFunction('details', 'remove');
+
       // If the field has data then use ',' else just put the data
       ulFieldName.textContent +=
         (ulFieldName.textContent ? ', ' : '') + data.name;
@@ -120,19 +127,44 @@ const fetchAssets = async (link, specifics) => {
       });
     })
     .catch((error) => console.log(error));
+  last ? await loaderFunction('details', 'remove') : '';
 };
 
 // Function to show or hide the loadingcirle
-const loaderFunction = (what, toDo) => {
-  const loaders = document.querySelectorAll('.loader');
-  loaders.forEach((loader) => {
-    if (loader.classList.contains(what)) {
-      if (toDo === 'add') {
-        loader.classList.remove('hidden');
-      } else {
-        loader.classList.add('hidden');
-      }
-    }
+const loaderFunction = async (what, toDo) => {
+  const loader = document.querySelector(`.loader.${what}`);
+  if (toDo === 'add') {
+    what === 'details' ? btnController(false) : '';
+    loader.classList.remove('hidden');
+  } else {
+    loader.classList.add('hidden');
+    what === 'details' ? btnController(true) : '';
+  }
+};
+
+// Function to properly hide and show for the loadingicon to appear
+const btnController = (bool) => {
+  if (document.querySelector('input:checked')) {
+    const checkedBtn = document.querySelector('input:checked');
+    const classToHide = checkedBtn.id;
+
+    console.log(classToHide);
+    const listToHide = document.querySelector(
+      `.details footer .${classToHide}`
+    );
+    setTimeout(
+      !bool
+        ? listToHide.classList.add('hidden')
+        : listToHide.classList.remove('hidden'),
+      1700
+    );
+  }
+};
+
+// Function to toggle radiobuttonfunctionality
+const btnToggle = (bool) => {
+  buttons.forEach((btn) => {
+    btn.disabled = bool;
   });
 };
 
@@ -151,15 +183,16 @@ characters.forEach((character) => {
 // EventListener to hide and show different type of details
 buttons.forEach((btn) => {
   btn.addEventListener('click', () => {
-    if (btn.checked) {
-      const detailLists = document.querySelectorAll('.details footer ul');
-      detailLists.forEach((list) => {
-        if (list.classList.contains(btn.id)) {
-          list.classList.remove('hidden');
-        } else {
-          list.classList.add('hidden');
-        }
-      });
+    if (!document.querySelector('.details ul').classList.contains('hidden')) {
+      if (btn.checked) {
+        detailLists.forEach((list) => {
+          if (list.classList.contains(btn.id)) {
+            list.classList.remove('hidden');
+          } else {
+            list.classList.add('hidden');
+          }
+        });
+      }
     }
   });
 });
@@ -180,5 +213,6 @@ pageSwappers.forEach((swapper) => {
   });
 });
 
+btnToggle(true);
 page = pageViewer();
 characterInfo = dataFetching(page);
