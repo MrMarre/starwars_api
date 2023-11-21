@@ -106,6 +106,7 @@ header h2 {
   color: #fff;
   letter-spacing: 3.6px;
   padding: 0.65rem 0 0.65rem 1.5rem;
+  cursor: pointer;
   /* padding-left: 1.5rem; */
 }
 
@@ -119,6 +120,10 @@ header h2 {
   color: #535556;
 }
 
+.characters > section > ul > li:hover {
+  background-color: #444444;
+  color: #fff;
+}
 .details > section {
   height: 267px;
   padding: 1rem;

@@ -16,7 +16,7 @@ const pageViewer = () => {
 
 // Function to fetch data based on pagenumber
 const dataFetching = async (pageNumber) => {
-  loaderFunction('characters', 'add');
+  await loaderFunction('characters', 'add');
   fetch(`${baseURL}?page=${page}`)
     .then((response) => {
       if (!response.ok) {
@@ -66,22 +66,23 @@ const printOutAssets = async (character) => {
   listItemsToClear.forEach((item) => {
     item.textContent = '';
   });
-  // Alot of ifs to find where the correct data should be placed and which to see.
-  buttons.forEach((btn, index) => {
+  console.log(character.name);
+  await specificLooper(character);
+  console.log('after');
+  await loaderFunction('details', 'remove');
+};
+
+// Alot of ifs to find where the correct data should be placed and which to see.
+const specificLooper = async (character) => {
+  buttons.forEach((btn) => {
     const fieldOfChoice = btn.id;
-    let last;
-    lastField = index === 3 ? true : false;
     if (character[fieldOfChoice].length > 0) {
       if (Array.isArray(character[fieldOfChoice])) {
-        character[fieldOfChoice].forEach((item, index) => {
-          lastItem =
-            index === character[fieldOfChoice].length - 1 ? true : false;
-
-          last = lastField && lastItem ? true : false;
-          fetchAssets(item, fieldOfChoice, last);
+        character[fieldOfChoice].forEach((item) => {
+          fetchAssets(item, fieldOfChoice);
         });
       } else {
-        fetchAssets(character[fieldOfChoice], fieldOfChoice, last);
+        fetchAssets(character[fieldOfChoice], fieldOfChoice);
       }
     } else {
       const ulFieldName = document.querySelector(
@@ -99,10 +100,11 @@ const printOutAssets = async (character) => {
       btnToggle(false);
     }
   });
+  return;
 };
 
 // Sort and push detail-data from the chosen character
-const fetchAssets = async (link, specifics, last) => {
+const fetchAssets = async (link, specifics) => {
   await fetch(link)
     .then((response) => {
       if (!response.ok) {
@@ -127,37 +129,45 @@ const fetchAssets = async (link, specifics, last) => {
       });
     })
     .catch((error) => console.log(error));
-  last ? await loaderFunction('details', 'remove') : '';
 };
 
 // Function to show or hide the loadingcirle
 const loaderFunction = async (what, toDo) => {
+  console.log(what, toDo);
   const loader = document.querySelector(`.loader.${what}`);
+  const characterList = document.querySelector('#characters ');
+  what === 'characters' ? characterList.classList.toggle('hidden') : '';
   if (toDo === 'add') {
     what === 'details' ? btnController(false) : '';
     loader.classList.remove('hidden');
   } else {
-    loader.classList.add('hidden');
-    what === 'details' ? btnController(true) : '';
+    if (what === 'details') {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        btnController(true);
+      }, 2000);
+    } else {
+      loader.classList.add('hidden');
+    }
   }
 };
 
 // Function to properly hide and show for the loadingicon to appear
-const btnController = (bool) => {
+const btnController = async (bool) => {
   if (document.querySelector('input:checked')) {
     const checkedBtn = document.querySelector('input:checked');
     const classToHide = checkedBtn.id;
 
-    console.log(classToHide);
     const listToHide = document.querySelector(
       `.details footer .${classToHide}`
     );
-    setTimeout(
-      !bool
-        ? listToHide.classList.add('hidden')
-        : listToHide.classList.remove('hidden'),
-      1700
-    );
+    if (!bool) {
+      listToHide.classList.add('hidden');
+    } else {
+      setTimeout(() => {
+        listToHide.classList.remove('hidden');
+      }, 1000);
+    }
   }
 };
 
@@ -170,7 +180,7 @@ const btnToggle = (bool) => {
 
 // EventListener to choose which character to see the details about
 characters.forEach((character) => {
-  character.addEventListener('click', function () {
+  character.addEventListener('click', function async() {
     charName = this.textContent;
     thisChar = characterInfo.find((character) => character.name === charName);
 
