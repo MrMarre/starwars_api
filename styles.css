@@ -112,9 +112,23 @@ li {
   display: none;
 }
 
+
+footer.char-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.char-footer span {
+  font-size: 1.375rem;
+  letter-spacing: .875rem;
+  /* Room for improvement with extra space on end of line */
+}
+
 img {
-  width: 2rem;
+  width: 3rem;
   height: auto;
+  margin: 1rem;
 }
 
 /* #lower.page-swapper {
