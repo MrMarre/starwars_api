@@ -69,6 +69,7 @@ header h2 {
 
 .characters > section {
   height: 503px;
+  position: relative;
 }
 
 .details > section {
@@ -77,11 +78,13 @@ header h2 {
 
 .characters > footer {
   height: 44px;
-  h
 }
 
 .details > footer {
+  position: relative;
   height: 284px;
+  background: rgb(63, 203, 47);
+  background: linear-gradient(180deg, #c4c4c4 18%, #8e8e8e 18%);
 }
 
 .details footer ul {
@@ -104,17 +107,24 @@ h1 {
   margin-left: 67px;
 }
 
+ul {
+  position: relative;
+}
+
 li {
   list-style: none;
 }
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #4444; /* Blue */
+  border: 14px solid #f3f3f3;
+  border-top: 14px solid #4444;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   animation: spin 2s linear infinite;
+  position: absolute;
+  left: calc(50% - 50px);
+  top: calc(50% - 50px);
 }
 
 @keyframes spin {
